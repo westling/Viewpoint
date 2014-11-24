@@ -31,10 +31,10 @@ module Viewpoint
       #   will attach to this message.
       # @return [Message,true] Returns true if the message is sent, if draft is true it will return the Message object
       #   or it raises an error with a message stating why the e-mail could not be sent.
-      def self.send(subject, body, to_recipients, cc_recipients=[], bcc_recipients=[], file_attachments=nil, draft=false)
+      def self.send(subject, body, to_recipients, cc_recipients=[], bcc_recipients=[], file_attachments=nil, draft=false, body_type='Text')
         item = {}
         item[:subject] = {:text => subject}
-        item[:body] = {:text => body, :body_type => 'Text'} unless body.nil?
+        item[:body] = {:text => body, :body_type => body_type} unless body.nil?
         to_recipients.each do |a|
           item[:to_recipients] = [] unless item[:to_recipients].is_a?(Array)
           item[:to_recipients] << {:mailbox => {:email_address => {:text => a}}}
